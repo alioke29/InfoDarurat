@@ -1,0 +1,136 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+
+@{
+    ViewData["Title"] = "User Detail Page";
+}
+
+<div id="modal-form-userdetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:0%; left:25%; width:50%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+
+            <div class="modal-header btn-primary" style="text-align:left; background-color:white;">
+                <h4 class="modal-title font-bold" style="color:#F03737;"><div id="title"></div></h4>
+            </div>
+
+            <div class="modal-body" style="height:500px; padding-left:30px; padding-top:30px;">
+
+                <form class="form-horizontal">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <input type="hidden" id="hdnId" value="" />
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">User Name</label>
+                                <div class="col-lg-5">
+                                    <input id="txtUserName" type="text" placeholder="User Name" class="form-control" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Password</label>
+                                <div class="col-lg-5">
+                                    <input id="txtPassword" type="password" placeholder="Password" class="form-control" value="">
+                                </div>
+                                <span class="text-danger" style="position:absolute; margin-left:400px;">(alpha numeric)</span>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Confirm Password</label>
+                                <div class="col-lg-5">
+                                    <input id="txtConfirmPassword" type="password" placeholder="Confirm Password" class="form-control" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Fullname</label>
+                                <div class="col-lg-5">
+                                    <input id="txtFullname" type="text" placeholder="Fullname" class="form-control" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">No. Kartu</label>
+                                <div class="col-lg-4">
+                                    <input id="hiddenKartuId" type="hidden" value="" />
+                                    <select class="form-control" id="ddlKartu">
+                                        <option value="0"></option>
+                                        @foreach (var itemKartu in (ViewData["vdKartuList"] as List<KartuEntity.Kartu>))
+                                        {
+                                            <option value="@itemKartu.ID">@itemKartu.NoKartu</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Email</label>
+                                <div class="col-lg-5">
+                                    <input id="txtEmail" type="text" placeholder="Email" class="form-control" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Role</label>
+                                <div class="col-lg-4">
+                                    <input id="hiddenRoleId" type="hidden" value="" />
+                                    <select class="form-control" id="ddlRole">
+                                        <option value="">-- Select role --</option>
+                                        @foreach (var itemRole in (ViewData["vdRoleList"] as List<RoleEntity.Role>))
+                                        {
+                                            <option value="@itemRole.ID">@itemRole.RoleName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Is Login</label>
+                                <div class="col-lg-3">
+                                    <input id="hiddenIsLogin" type="hidden" value="" />
+                                    <input id="chkIsLogin" type="checkbox" />
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Is Active</label>
+                                <div class="col-lg-3">
+                                    <input id="hiddenIsActive" type="hidden" value="" />
+                                    <select class="form-control" id="ddlIsActive">
+                                        <option value="False">Inactive</option>
+                                        <option value="True">Active</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+
+            <div class="modal-footer" style="width:100%; left:10%;">
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getClose();">
+                    <b>Cancel</b>
+                </button>
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getSave();">
+                    <b>Save</b>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

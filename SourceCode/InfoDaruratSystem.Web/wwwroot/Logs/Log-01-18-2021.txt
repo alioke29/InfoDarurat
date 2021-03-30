@@ -1,0 +1,4 @@
+Cannot use table 'Position' for entity type 'Grade' since it is being used for entity type 'Department' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'Grade' on the primary key properties and pointing to the primary key on another entity typed mapped to 'Position'. ----- 18-Jan-2021 10:52:07
+Value cannot be null. (Parameter 'source') ----- 18-Jan-2021 10:52:07
+Cannot use table 'Position' for entity type 'Grade' since it is being used for entity type 'Department' and potentially other entity types, but there is no linking relationship. Add a foreign key to 'Grade' on the primary key properties and pointing to the primary key on another entity typed mapped to 'Position'. ----- 18-Jan-2021 10:52:13
+Value cannot be null. (Parameter 'source') ----- 18-Jan-2021 10:52:13

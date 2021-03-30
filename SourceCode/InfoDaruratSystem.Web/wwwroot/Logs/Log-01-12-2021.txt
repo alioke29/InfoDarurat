@@ -1,0 +1,6 @@
+Invalid column name 'UpdatedBy'.
+Invalid column name 'parent_name'. ----- 12-Jan-2021 16:28:58
+Invalid column name 'UpdatedBy'.
+Invalid column name 'parent_name'. ----- 12-Jan-2021 16:30:04
+Invalid column name 'UpdatedBy'.
+Invalid column name 'parent_name'. ----- 12-Jan-2021 16:33:19

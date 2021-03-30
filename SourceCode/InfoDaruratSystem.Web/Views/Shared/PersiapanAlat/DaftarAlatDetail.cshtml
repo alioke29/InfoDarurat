@@ -1,0 +1,89 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+
+@{
+    ViewData["Title"] = "Daftar Alat Detail Page";
+}
+
+<div id="modal-form-daftaralatdetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:5%; left:25%; width:50%; overflow:hidden;  ">
+
+    <div class="modal-dialog" >
+        <div class="modal-content" style="width:120%;">
+
+            <div class="modal-header btn-primary" style="text-align:left; background-color:white;">
+                <h4 class="modal-title font-bold" style="color:#F03737;">Add Daftar Alat</h4>
+            </div>
+
+            <div class="modal-body" style="height:450px; ">
+
+                <form class="form-horizontal">
+
+                    <input type="hidden" id="hdnId" value="" />
+                    <input type="hidden" id="hdnDaftarAlat" value="" />
+                    <input type="hidden" id="hdnNamaAlat" value="" />
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="form-group row" style="width:60%; height:300px; overflow-y:scroll;overflow-x:hidden; padding-left:20px; ">
+
+                                <table class="table table-striped table-bordered table-hover daftarAlatTable" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Nama Peralatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (ViewData["vdDaftarAlatList"] != null)
+                                        {
+
+                                            @foreach (var item in (ViewData["vdDaftarAlatList"] as List<DaftarAlatEntity.DaftarAlat>))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.NamaAlat
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-3">Tambah Alat</label>
+
+                                <div class="col-lg-6">
+                                    <input id="txtNamaAlatDaftarAlat" type="text" placeholder="Nama Peralatan" class="form-control" value="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+
+            <div class="modal-footer" style="width:100%; left:10%;">
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="$('#modal-form-daftaralatdetail').modal('hide');">
+                    <b>Cancel</b>
+                </button>
+
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getSaveDaftarAlat();">
+                    <b>Submit</b>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

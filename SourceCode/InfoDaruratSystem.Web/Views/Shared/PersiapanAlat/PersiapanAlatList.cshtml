@@ -1,0 +1,254 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+@using InfoDaruratSystem.Web.Library.Utilities;
+
+@{
+    //ViewData["Title"] = "Aktivitas List";
+
+}
+
+
+<!-- Ajax Loading Control -->
+@Html.Partial("UserControls/AjaxLoadingControl")
+
+<!-- Persiapan Alat Detail Control -->
+@Html.Partial("PersiapanAlat/PersiapanAlatDetail")
+
+<!-- Daftar Alat Detail Control -->
+@Html.Partial("PersiapanAlat/DaftarAlatDetail")
+
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row page-title">
+                <div class="col-md-12">
+                    <h3 class="mb-1 mt-0">
+                        @ViewData["vdDisplayName"].ToString()
+                    </h3>
+                </div>
+            </div>
+
+            <a onclick="loadingProcess()" href="@Url.Action("Index", "Home")">Home</a>
+            / @ViewData["vdParentName"].ToString()
+            / <strong>@ViewData["vdDisplayName"].ToString()</strong>
+
+
+
+            <div style="position:absolute; margin-top:-50px; margin-left:700px; width:400px;">
+
+                <button class="btn btn-primary mt-2 mr-1" style="background-color:#F03737;"
+                        onclick="getView('', '', '', '@ViewData["vdDaftarAlatList"]');">
+                    <i class="uil-plus"></i> Tambah Persiapan Alat
+                </button>
+                <button class="btn btn-primary mt-2 mr-1" style="background-color:#F03737;"
+                        onclick="getViewDaftarAlat();">
+                    <i class="uil-plus"></i> Daftar Alat
+                </button>
+
+
+            </div>
+
+            <br /><br />
+
+            <div class="row border-bottom btn-primary page-heading" style="padding-top:10px; height:70px; background-color:lightgray;">
+            </div>
+
+            <table style="position:absolute; margin-top:-70px">
+                <thead>
+                    <tr>
+                        <th class="text-left col-lg-12">Nama Peralatan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-12">
+                            <input id="txtNamaAlatFilter" type="text" placeholder="Nama Peralatan" style="width:250px" value="@ViewData["vdNamaAlat"]">
+                            &nbsp;&nbsp;
+                            <span class="col-lg-10" style="position:absolute; margin-top:-15px;">
+                                <button class="btn btn-success mt-2 mr-1" style="background-color:white; color:#F03737;"
+                                        onclick="getFilter();">
+                                    <i class="uil-filter"></i> Filter
+                                </button>
+                                <button class="btn btn-success mt-2 mr-1" style="background-color:white; color:#F03737;"
+                                        onclick="getReset();">
+                                    <i class="uil-refresh"></i> Reset
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br />
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+
+                                <table class="table mb-0 persiapanAlatTable" width="100%" style="overflow:hidden;">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-left">No.</th>
+                                            <th class="text-left">Level</th>
+                                            <th class="text-left">Nama</th>
+                                            <th class="text-left">Spesifikasi</th>
+                                            <th class="text-left">Nama Peralatan</th>
+                                            <th class="text-left" width="15%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (ViewData["vdPersiapanAlatList"] != null)
+                                        {
+                                            int rowNo = 0;
+
+                                            @foreach (var item in (ViewData["vdPersiapanAlatList"] as List<PersiapanAlatEntity.PersiapanAlat>))
+                                            {
+                                                rowNo++;
+                                                <tr>
+                                                    <td>
+                                                        @rowNo
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            List<PanggilanEntity.Panggilan> listPanggilan = ViewData["vdPanggilanList"] as List<PanggilanEntity.Panggilan>;
+                                                            string levelId = listPanggilan.Where(x => x.ID == item.IDPanggilan).FirstOrDefault().IDLevel.ToString();
+                                                            string nama = listPanggilan.Where(x => x.ID == item.IDPanggilan).FirstOrDefault().Nama;
+                                                            string spec = listPanggilan.Where(x => x.ID == item.IDPanggilan).FirstOrDefault().Spec;
+
+                                                            List<LevelEntity.Level> listLevel = ViewData["vdLevelList"] as List<LevelEntity.Level>;
+                                                            string levelName = listLevel.Where(x => x.ID == Convert.ToInt16(levelId)).FirstOrDefault().LevelName;
+
+                                                        }
+                                                        @levelName
+                                                    </td>
+                                                    <td>
+                                                        @nama
+                                                    </td>
+                                                    <td>
+                                                        @spec
+                                                    </td>
+                                                    <td>
+                                                        @item.NamaPeralatan
+                                                    </td>
+                                                    <td class="text-center">
+
+                                                        <div class="dropdown">
+
+                                                            <a id="hrefAksi" class="dropdown-toggle" href="#">
+                                                                Aksi <span data-feather="chevron-down"></span>
+                                                            </a>
+
+                                                            <div id="divAksi" class="dropdown-menu" style="position:static; ">
+
+                                                                <a onclick="getView('@item.ID', '@item.IDPanggilan', '@item.NamaPeralatan', '@ViewData["vdDaftarAlatList"]');"
+                                                                   href="#" class="dropdown-item notify-item">
+                                                                    <span>Edit</span>
+                                                                </a>
+
+                                                                <a onclick="getDelete('@item.ID');" href="#" class="dropdown-item notify-item">
+                                                                    <span>Delete</span>
+                                                                </a>
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section Styles {
+    <link href="~/shreyu/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/shreyu/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/shreyu/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/shreyu/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/lib_bower/sweetalert/dist/sweetalert.css" />
+
+}
+
+@section Scripts {
+
+    <script src="~/shreyu/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/shreyu/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/shreyu/libs/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/shreyu/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/shreyu/libs/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/shreyu/libs/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="~/shreyu/libs/datatables/dataTables.select.min.js"></script>
+
+    <script src="~/lib_bower/sweetalert/dist/sweetalert-dev.js"></script>
+    <script src="~/lib_bower/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="~/js/script.min.js" asp-append-version="true"></script>
+
+    <script src="~/Content/js_custom/persiapanalat.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //$('.persiapanAlatTable').DataTable({
+            //    lengthMenu: [
+            //        [10, 20, 50, 100],
+            //        [10, 20, 50, 100]
+            //    ],
+            //    iDisplayLength: 20,
+            //    filter: null,
+            //    paging: true,
+            //    pagingType: "full_numbers"
+            //});
+
+
+            //$('.daftarAlatTable').DataTable({
+            //    lengthMenu: [],
+            //    //iDisplayLength: 20,
+            //    info: false,
+            //    filter: null,
+            //    paging: false,
+            //    pagingType: ""
+            //});
+
+        });
+
+        $('.persiapanAlatTable').find("tbody").on("click", "td", function () {
+
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).closest('tr').index();
+
+
+            // DELETE COLUMN
+            if (col == 5) {
+
+                $('.persiapanAlatTable tbody').find('tr:eq(' + row + ')').find('td:eq(5)').find('#divAksi').toggle();
+            }
+
+        });
+
+    </script>
+}

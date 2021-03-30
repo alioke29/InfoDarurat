@@ -1,0 +1,80 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+
+@{
+    ViewData["Title"] = "Panggilan Detail Page";
+}
+
+<div id="modal-form-panggilandetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:10%; left:25%; width:50%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+
+            <div class="modal-header btn-primary" style="text-align:left; background-color:white;" >
+                <h4 class="modal-title font-bold" style="color:#F03737;"><div id="title"></div></h4>
+            </div>
+
+            <div class="modal-body" style="height:300px; padding-left:30px; padding-top:30px;">
+
+                <form class="form-horizontal">
+
+                    <input type="hidden" id="hdnId" value="" />
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Level</label>
+                        <div class="col-lg-6">
+                            <input id="hiddenLevelId" type="hidden" value="" />
+                            <select class="form-control" id="ddlLevel">
+                                <option value="">-- select level --</option>
+                                @foreach (var itemLevel in (ViewData["vdLevelList"] as List<LevelEntity.Level>))
+                                {
+                                    <option value="@itemLevel.ID">@itemLevel.LevelName </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Nama</label>
+                        <div class="col-lg-6">
+                            <input id="txtNama" type="text" placeholder="Nama" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Spesifikasi</label>
+                        <div class="col-lg-6">
+                            <input id="txtSpec" type="text" placeholder="Spesifikasi" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">No. Panggilan</label>
+                        <div class="col-lg-4">
+                            <input id="txtNoPanggilan" type="text" placeholder="No Panggilan" class="form-control" value="">
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer" style="width:100%; left:10%;">
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getClose();">
+                    <b>Cancel</b>
+                </button>
+
+
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getSave();">
+                    <b>Save</b>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

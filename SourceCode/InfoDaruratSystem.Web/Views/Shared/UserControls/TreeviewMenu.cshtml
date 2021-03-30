@@ -1,0 +1,74 @@
+﻿@model List<InfoDaruratSystem.Web.Library.Entities.MenuEntity.Menu>
+
+<!-- Ajax Loading Control -->
+@Html.Partial("UserControls/AjaxLoadingControl")
+
+
+
+@if (Model != null && Model.Count() > 0)
+{
+    @foreach (var item in Model
+                               .Where(x => x.ParentMenuId == 0))
+    {
+
+        if (item.ID == Convert.ToInt64(ViewData["vdTreeviewMenuId"]))
+        {
+            ViewData["vdActive"] = "active";
+        }
+        else
+        {   
+            ViewData["vdActive"] = "";
+        }
+
+        @*<li class="@ViewData["vdActive"]">*@
+
+        <li>
+            <a href="javascript: void(0);">
+
+
+                @if (item.DisplayName == "Setting Security")
+                {
+                    <i data-feather="settings"></i>
+                }
+                else if (item.DisplayName == "Area Terlarang")
+                {
+                    <i data-feather="zap"></i>
+                }
+                else if (item.DisplayName == "Sistem Darurat")
+                {
+                    <i data-feather="alert-circle"></i>
+                }
+
+                <span>@item.DisplayName</span>
+                <span class="menu-arrow"></span>
+            </a>
+
+                <ul class="nav-second-level" aria-expanded="false">
+
+                    @foreach (var item2 in Model.Where(x => x.ParentMenuId != 0)
+                                               .Where(x => x.ParentMenuId == item.ID))
+                    {
+
+                        <li>
+                            <a onclick="loadingProcess()" href="@Url.Action(item2.UrlNav, "Home", new { id = item.ID + "_" + item2.ID})">@item2.DisplayName</a>
+                        </li>
+                    }
+
+                </ul>
+
+          </li>
+
+
+    }
+}
+
+
+
+
+<script type="text/javascript">
+
+    function loadingProcess() {
+        $("#mask").show();
+    }
+
+</script>

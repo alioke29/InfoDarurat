@@ -1,0 +1,203 @@
+﻿
+body
+{	
+  background-color: white; 
+
+}
+
+
+
+.header-logo
+{	
+    background-image: url('../../Content/images/logo_modalku.png');
+    background-repeat:repeat;
+    background-size:180px 61px;
+    width:180px;
+    height:61px;
+    margin-top:300px;
+    margin-left:38%;
+	position:absolute;
+}
+
+ 
+/* Tabs */
+.tabs-container .panel-body {
+    background: #fff;
+    border: 2px solid #18a689;
+    border-radius: 2px;
+    padding: 20px;
+    position: relative; }
+
+.tabs-container .nav-tabs > li.active > a,
+.tabs-container .nav-tabs > li.active > a:hover,
+.tabs-container .nav-tabs > li.active > a:focus {
+    border: 2px solid #18a689;
+    border-bottom-color: transparent;
+    background-color: #18a689; 
+    color:white;
+}
+
+.tabs-container .nav-tabs > li.active > a, .tabs-container .nav-tabs > li.active > a:hover, .tabs-container .nav-tabs > li.active > a:focus {
+    border: 2px solid #18a689;
+    border-bottom-color: transparent; }
+
+.tabs-container .nav-tabs {
+    border-bottom: 2px solid #18a689; }
+
+.tabs-container .tabs-left .tab-pane .panel-body, .tabs-container .tabs-right .tab-pane .panel-body {
+    border-top: 2px solid #18a689; }
+
+/* Text Wrap */
+.custom-width {
+    table-layout: fixed;
+    word-wrap:break-word;
+}
+
+
+/* Background Locked */
+
+#mask
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 4;
+    opacity: 0.4;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* first!*/
+    filter: alpha(opacity=40); /* second!*/
+    background-color: gray;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+#mask-msg
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 4;
+    opacity: 0.4;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* first!*/
+    filter: alpha(opacity=40); /* second!*/
+    background-color: gray;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+            
+
+#loadingProcess 
+{
+  height: 80%;
+  margin: 30px;
+  position: fixed;
+  top: 30%;
+  left: 45%;
+  width: 80%;        
+  z-index:10000;    
+  color:white;
+  font-weight:bold;   
+}
+                      
+.TextBoxStd-date
+{
+    text-align: left;
+    font-family: "Verdana";
+    font-size:small;  
+    width:100px; 
+    height:16px;
+}      
+
+.TextBoxStd-numeric
+{
+    text-align: right;
+    font-family: "Verdana";
+    font-size:small;  
+    width:100px; 
+    height:16px;
+}          
+
+.TextBoxStd-numeric-disabled
+{
+    text-align: right;
+    font-family: "Verdana";
+    width:100px; 
+    height:18px;
+    border-width: 1px;
+    color: black;
+}
+
+.calendar .ajax__calendar_container {
+    border:1px solid #646464;
+    background-color: white;
+    color: black;
+}
+
+.calendar-textbox 
+{
+    position:absolute;
+    margin-top:1px;
+}
+
+.calendar-cursor:hover
+{
+     cursor:pointer;
+}
+
+
+.scroll-grid
+{
+    /*overflow-x:scroll;*/
+    overflow-x:scroll;
+    z-index:1000;
+}
+
+ /* Begin 2 Color Row */
+tr.even  
+{
+    background-color: white; 
+}
+
+tr.odd 
+{ 
+    background-color:#ffe6e6; 
+}
+/* End */
+
+
+.success {
+    border:solid 1px rgb(13,109,0);
+    width:300px;
+    padding:5px;
+    margin-left:-45px;
+    margin-top:60px;
+    background-color:rgb(215,255,218);
+}
+
+.failed {         
+    border:solid 1px red;
+    width:300px;
+    padding:5px;
+    background-color:rgb(255,229,229);
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.display-hide {
+  display: none;
+}
+
+.display-show {
+  display: block;
+}

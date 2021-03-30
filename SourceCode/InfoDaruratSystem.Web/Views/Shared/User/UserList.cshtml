@@ -1,0 +1,294 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+@using InfoDaruratSystem.Web.Library.Utilities;
+
+@{
+    //ViewData["Title"] = "User List";
+
+}
+
+
+<!-- Ajax Loading Control -->
+@Html.Partial("UserControls/AjaxLoadingControl")
+
+<!-- User Detail Control -->
+@Html.Partial("User/UserDetail")
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row page-title">
+                <div class="col-md-12">
+                    <h3 class="mb-1 mt-0">
+                        @ViewData["vdDisplayName"].ToString()
+                    </h3>
+                </div>
+            </div>
+
+            <a onclick="loadingProcess()" href="@Url.Action("Index", "Home")">Home</a>
+            / @ViewData["vdParentName"].ToString()
+            / <strong>@ViewData["vdDisplayName"].ToString()</strong>
+
+
+
+            <div style="position:absolute; margin-top:-50px; margin-left:850px; width:200px;">
+
+                <button class="btn btn-primary mt-2 mr-1" style="background-color:#F03737;"
+                        onclick="getView('', '', '', '', '', '0', '', '', '', '');">
+                    <i class="uil-plus"></i> Tambah User
+                </button>
+
+
+            </div>
+
+            <br /><br />
+
+            <div class="row border-bottom btn-primary page-heading" style="padding-top:10px; height:70px; background-color:lightgray;">
+            </div>
+
+            <table style="position:absolute; margin-top:-70px">
+                <thead>
+                    <tr>
+                        <th class="text-left text-white">Fullname</th>
+                        <th class="text-left text-white">Email</th>
+                        <th class="text-left text-white">Status</th>
+                        <th class="text-left text-white">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td valign="top" class="">
+                            <input id="txtFullnameFilter" type="text" placeholder="Fullname" style="width:250px" value="@ViewData["vdFullname"]">
+                        </td>
+                        <td valign="top" class="3">
+                            <input id="txtEmailFilter" type="text" placeholder="Email" style="width:250px" value="@ViewData["vdEmail"]">
+                        </td>
+                        <td valign="top" class="">
+                            <input id="hiddenStatusFilter" type="hidden" value="@ViewData["vdStatus"]" />
+                            <select id="ddlStatusFilter" autofocus>
+                                <option value="">All</option>
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </td>
+                        <td valign="top" class="">
+                            <input id="hiddenRoleFilter" type="hidden" value="@ViewData["vdRole"]" />
+                            <select id="ddlRoleFilter" autofocus>
+                                <option value="">All</option>
+                                @foreach (var itemRole in (ViewData["vdRoleList"] as List<RoleEntity.Role>))
+                                {
+                                    <option value="@itemRole.ID" selected="selected">@itemRole.RoleName</option>
+                                }
+                            </select>
+
+                            &nbsp;&nbsp;
+                            <span class="" style="position:absolute; margin-top:-20px; width:100%;">
+                                <button class="btn btn-success mt-2 mr-1" style="background-color:white; color:#F03737;"
+                                        onclick="getFilter();">
+                                    <i class="uil-filter"></i> Filter
+                                </button>
+                                <button class="btn btn-success mt-2 mr-1" style="background-color:white; color:#F03737;"
+                                        onclick="getReset();">
+                                    <i class="uil-refresh"></i> Reset
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <br />
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+
+                                <table class="table mb-0 userTable" width="100%" style="overflow:hidden;">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-left">No.</th>
+                                            <th class="text-left">User Name</th>
+                                            <th class="text-left">Fullname</th>
+                                            <th class="text-left">No Kartu</th>
+                                            <th class="text-left">Role Name</th>
+                                            <th class="text-left">Email</th>
+                                            <th class="text-left">Last Login</th>
+                                            <th class="text-left" width="10%">Is Login</th>
+                                            <th class="text-left" width="10%">Status</th>
+                                            <th class="text-left" width="15%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (ViewData["vdUserList"] != null)
+                                        {
+                                            int rowNo = 0;
+
+                                            @foreach (var item in (ViewData["vdUserList"] as List<UserEntity.User>))
+                                            {
+                                                rowNo++;
+                                                <tr>
+                                                    <td>
+                                                        @rowNo
+                                                    </td>
+                                                    <td>
+                                                        @item.UserName
+                                                    </td>
+                                                    <td>
+                                                        @item.Fullname
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            List<KartuEntity.Kartu> listKartu = ViewData["vdKartuList"] as List<KartuEntity.Kartu>;
+                                                            string noKartu = "";
+                                                            if (listKartu.Where(x => x.ID == item.IDKartu).Count() > 0)
+                                                                noKartu = listKartu.Where(x => x.ID == item.IDKartu).FirstOrDefault().NoKartu;
+                                                        }
+                                                        @noKartu
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            List<RoleEntity.Role> listRole = ViewData["vdRoleList"] as List<RoleEntity.Role>;
+                                                            string roleName = listRole.Where(x => x.ID == item.IDRole).FirstOrDefault().RoleName;
+                                                        }
+                                                        @roleName
+                                                    </td>
+                                                    <td>
+                                                        @item.Email
+                                                    </td>
+                                                    <td>
+                                                        @item.LastLoginDate
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            bool isLogin = Convert.ToBoolean(item.IsLogin);
+                                                            string strIsLogin = isLogin ? "Yes" : "No";
+                                                            ViewData["vdLabelBgIsLogin"] = isLogin ? "label-primary" : "label-warning";
+                                                        }
+                                                        <span class="@ViewData["vdLabelBgIsLogin"]">
+                                                            @strIsLogin
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            bool isActive = Convert.ToBoolean(item.IsActive);
+                                                            string strIsActive = isActive ? "Active" : "Inactive";
+                                                            ViewData["vdLabelBgIsActive"] = isActive ? "label-primary" : "label-warning";
+                                                        }
+                                                        <span class="@ViewData["vdLabelBgIsActive"]">
+                                                            @strIsActive
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-center">
+
+                                                        <div class="dropdown">
+
+                                                            <a id="hrefAksi" class="dropdown-toggle" href="#">
+                                                                Aksi <span data-feather="chevron-down"></span>
+                                                            </a>
+
+                                                            <div id="divAksi" class="dropdown-menu" style="position:static; ">
+
+                                                                <a onclick="getView('@item.ID', '@item.UserName','@item.Password', '@item.Password',
+                                                                                    '@item.Fullname', '@item.IDKartu','@item.Email', '@item.IDRole','@item.IsLogin','@item.IsActive');"
+                                                                   href="#" class="dropdown-item notify-item">
+                                                                    <span>Edit</span>
+                                                                </a>
+
+                                                                <a onclick="getDelete('@item.ID', '@item.UserName')" href="#" class="dropdown-item notify-item">
+                                                                    <span>Delete</span>
+                                                                </a>
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+@section Styles {
+    <link href="~/shreyu/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/shreyu/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/shreyu/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/shreyu/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/lib_bower/sweetalert/dist/sweetalert.css" />
+}
+
+@section Scripts {
+
+    <script src="~/shreyu/libs/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/shreyu/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/shreyu/libs/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/shreyu/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/shreyu/libs/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/shreyu/libs/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="~/shreyu/libs/datatables/dataTables.select.min.js"></script>
+
+    <script src="~/lib_bower/sweetalert/dist/sweetalert-dev.js"></script>
+    <script src="~/lib_bower/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="~/js/script.min.js" asp-append-version="true"></script>
+
+    <script src="~/content/js_custom/user.js"></script>
+
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+
+        //    $('.userTable').DataTable({
+        //        lengthMenu: [
+        //            [10, 20, 50, 100],
+        //            [10, 20, 50, 100]
+        //        ],
+        //        iDisplayLength: 20,
+        //        filter: null,
+        //        paging: true,
+        //        pagingType: "full_numbers"
+        //    });
+
+        //});
+
+        $('.userTable').find("tbody").on("click", "td", function () {
+
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).closest('tr').index();
+
+            // DELETE COLUMN
+            if (col == 9) {
+
+                $('.userTable tbody').find('tr:eq(' + row + ')').find('td:eq(9)').find('#divAksi').toggle();
+            }
+
+        });
+
+    </script>
+}

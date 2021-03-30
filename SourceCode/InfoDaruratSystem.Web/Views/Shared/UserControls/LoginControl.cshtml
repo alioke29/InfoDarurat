@@ -1,0 +1,87 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+
+<div id="modal-form-login" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:10%; left:25%; width:50%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+            <div class="modal-header btn-primary" style="text-align:left;">
+                <h4 class="modal-title font-bold text-white">User Login</h4>
+            </div>
+
+            <div class="modal-body" style="height:200px; ">
+
+                <form class="form-horizontal">
+
+                    <span style="position:absolute; margin-left:480px; margin-top:-10px;">
+                        @*<img src="" width="120" height="80" style="opacity:0.4;filter:alpha(opacity=40);" />*@
+                    </span>
+
+                    <div class="form-group row">
+                        <label class="col-lg-10">
+                            <h3 style="color:blue"><b>Sistem Informasi Keadaan Darurat</b></h3>
+                        </label>
+                        <div class="col-lg-6">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">User Name</label>
+                        <div class="col-lg-6">
+                            <input id="txtUserNameLogin" type="text" placeholder="User Name" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Password</label>
+                        <div class="col-lg-6">
+                            <input id="txtPasswordLogin" type="password" placeholder="Password" maxlength="8" class="form-control" value="">
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+            <div class="modal-footer" style="width:100%; padding-left:200px; height:80px;">
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0;"
+                        onclick="getLogin();">
+                    <b>Login</b>
+                </button>
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0;"
+                        onclick="clearText();">
+                    <b>Cancel</b>
+                </button>
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0;"
+                        onclick="$('#modal-form-login').modal('hide');">
+                    <b>Close</b>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $('#txtPassword').on("keypress", function (e) {
+        if (e.keyCode == 13) {
+
+            getLogin();
+            //return false; // prevent the button click from happening
+        }
+    });
+
+</script>
+

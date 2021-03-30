@@ -1,0 +1,46 @@
+﻿
+@model List<InfoDaruratSystem.Web.Library.Entities.MenuEntity.Menu>
+
+@{
+
+    ViewBag.Title = "Home";
+
+
+}
+
+
+
+
+<div class="left-side-menu">
+    <div class="sidebar-content" >
+        <div id="sidebar-menu" class="slimscroll-menu">
+
+            <!--- Sidemenu -->
+
+            <ul class="metismenu" id="menu-bar">
+
+                <li>
+                    <a onclick="loadingProcess()" href="@Url.Action("Index", "Home")">
+                        <i data-feather="home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Get Treeview Control -->
+                @Html.Partial("UserControls/TreeviewMenu")
+
+
+            </ul>
+
+
+
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
+

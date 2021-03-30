@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Informasi Keadaan Darurat</title>
+</head>
+
+
+<!-- Ajax Loading Control -->
+@Html.Partial("UserControls/AjaxLoadingControl")
+
+<body  style="background-color: #F5F6F9;">
+
+    <div class="animated fadeIn">
+
+
+        <div style="position:absolute; margin-left:0px; margin-top:0px;">
+
+            <img src="~/Content/images/screen.jpg" width="900" height="656" />
+
+        </div>
+
+        <div style="position:absolute; margin-left:50px; margin-top:60px;">
+
+            <h2 style="color:white; font-weight:bold;">Emergency <br />Information </h2>
+
+        </div>
+
+
+        <div style="position:absolute; margin-left:50px; margin-top:300px;">
+
+            <h1 style="color:white; font-weight:bold;">
+                Selamat Datang di sistem <br />informasi
+                <font color="#F03737">keadaan darurat</font>
+            </h1>
+
+        </div>
+
+
+        <div style="position:absolute; margin-left:955px; margin-top:280px; border-radius: 16px;
+                     background-color: #FFFFFF; width: 350px; height: 350px;">
+
+            <div style="position:absolute; margin-left:30px; margin-top:30px;">
+                <h2 style="color:black; font-weight:bold;">Login</h2>
+            </div>
+
+            <br /><br />
+
+                  <div style="position:absolute; margin-left:30px; margin-top:80px;">
+
+                      <div class="form-group row">
+                          <div class="col-lg-5">
+                              <input id="txtUserNameLogin" type="text" placeholder="User Name" class="form-control"
+                                     style="width:280px; background-color: #FFFFFF; border: 1px solid #E1E1E1; border-radius: 10px;" value="">
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <div class="col-lg-5">
+                              <input id="txtPasswordLogin" type="password" placeholder="Password" class="form-control"
+                                     style="width:280px; background-color: #FFFFFF; border: 1px solid #E1E1E1; border-radius: 10px;" value="">
+                          </div>
+                      </div>
+
+                      <div class="form-group row" style="padding-left:16px;">
+
+                          <button class="btn btn-primary mt-2 mr-1" type="button" style="width:280px; background-color:#F03737;"
+                                  onclick="getLogin();">
+                              <b style="color:white;">LOGIN</b>
+                          </button>
+                      </div>
+
+
+
+                  </div>
+
+             </div>
+
+</body>
+</html>
+
+
+
+
+<link rel="stylesheet" href="~/lib_bower/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/lib_bower/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="~/css/animate.css" />
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib_bower/sweetalert/dist/sweetalert.css" />
+
+<link rel="stylesheet" href="~/Content/css/login.css" />
+
+
+
+<script src="~/lib_bower/jquery/dist/jquery.js"></script>
+<script src="~/lib_bower/sweetalert/dist/sweetalert-dev.js"></script>
+<script src="~/lib_bower/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="~/content/js_custom/login.js"></script>
+
+
+<script>
+
+        $(document).ready(function () {
+
+            $('#mask').hide();
+
+        });
+
+    $("#txtPasswordLogin").keyup(function (event) {
+        if (event.keyCode == 13) {
+            login();
+        }
+    });
+
+
+</script>
+
+
+
+
+

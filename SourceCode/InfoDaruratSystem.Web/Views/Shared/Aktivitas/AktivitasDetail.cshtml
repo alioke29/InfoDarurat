@@ -1,0 +1,77 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+
+@{
+    ViewData["Title"] = "Aktivitas Detail Page";
+}
+
+<div id="modal-form-aktivitasdetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:10%; left:25%; width:50%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+
+            <div class="modal-header btn-primary" style="text-align:left; background-color:white;">
+                <h4 class="modal-title font-bold" style="color:#F03737;"><div id="title"></div></h4>
+            </div>
+
+            <div class="modal-body" style="height:300px; padding-left:30px; padding-top:30px;">
+
+                <form class="form-horizontal">
+
+                    <input type="hidden" id="hdnId" value="" />
+
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Kartu</label>
+                        <div class="col-lg-6">
+                            <input id="hiddenKartuId" type="hidden" value="" />
+                            <select class="form-control" id="ddlKartu">
+                                <option value="">-- select kartu --</option>
+                                @foreach (var itemKartu in (ViewData["vdKartuList"] as List<KartuEntity.Kartu>))
+                                {
+                                    bool isActive = Convert.ToBoolean(itemKartu.IsActive);
+                                    string strIsActive = isActive ? "Aktif" : "Tidak Aktif";
+
+                                    <option value="@itemKartu.ID">@itemKartu.NoKartu - @itemKartu.Desc - @strIsActive</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Jam Masuk</label>
+                        <div class="col-lg-4">
+                            <input id="txtJamMasuk" type="text" placeholder="Jam Masuk" maxlength="10" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Jam Keluar</label>
+                        <div class="col-lg-4">
+                            <input id="txtJamKeluar" type="text" placeholder="Jam Keluar" maxlength="10" class="form-control" value="">
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+
+            <div class="modal-footer" style="width:100%; left:10%;">
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getClose();">
+                    <b>Cancel</b>
+                </button>
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getSave();">
+                    <b>Save</b>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

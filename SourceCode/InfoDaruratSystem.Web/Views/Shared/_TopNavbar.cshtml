@@ -1,0 +1,155 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    @*<link rel="stylesheet" href="~/lib_bower/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib_bower/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/lib_bower/sweetalert/dist/sweetalert.css" />
+
+    <link href="~/shreyu/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/shreyu/css/icons.min.css" rel="stylesheet" />
+    <link href="~/shreyu/css/app.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/Content/css/login.css" />
+
+    <style>
+        .text-grad {
+            font-size: 22px;
+            font-family: Arial;
+            font-weight: bold;
+            background: -webkit-linear-gradient(blue, yellow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+
+    <script src="~/lib_bower/jquery/dist/jquery.js"></script>
+
+    <script src="~/lib_bower/sweetalert/dist/sweetalert-dev.js"></script>
+    <script src="~/lib_bower/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="~/shreyu/js/app.min.js"></script>
+    <script src="~/shreyu/js/vendor.min.js"></script>
+
+    <script src="~/content/js_custom/login.js"></script>
+
+
+    </head>
+
+<!-- Login Control -->
+@Html.Partial("UserControls/LoginControl")
+
+
+<body>
+
+    <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+
+        <div class="container-fluid">
+            <!-- LOGO -->
+
+            <a href="/" class="navbar-brand mr-0 mr-md-2 logo">
+
+                <div class="navbar navbar-static-top" style="position:absolute;margin-left:0px; margin-top:-35px;">
+                    @*<img alt="image" src="~/content/images/Logo.jpg" height="50" width="100" />*@
+                    <h5><b>Emergency <br />Information</b></h5>
+
+                </div>
+            </a>
+
+            <span style="position:absolute;margin-left:250px; margin-top:-10px;">
+                <h5>Sistem Informasi Keadaan Darurat</h5>
+            </span>
+
+
+            <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                <li class="">
+                    <button class="button-menu-mobile open-left disable-btn">
+                        <i data-feather="menu" class="menu-icon"></i>
+                        <i data-feather="x" class="close-icon"></i>
+                    </button>
+                </li>
+            </ul>
+
+
+            <div style="position:absolute; margin-left:1040px; margin-top:0px;">
+
+                <div class="media user-profile mt-2 mb-2">
+
+                    <img src="~/Content/images/NoPhoto.jpg" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
+
+                    <div class="media-body" style="padding-top:10px;">
+
+                        @if (ViewData["vdHeaderName"] != null)
+                        {
+                            string userName = "";
+
+                            userName = ViewData["vdHeaderName"].ToString();
+
+                            <h6 class="pro-user-name mt-0 mb-0">@userName</h6>
+                            @*<span class="pro-user-desc">@userName</span>*@
+                        }
+
+
+                    </div>
+
+                    <div class="dropdown">
+
+                        <a id="hrefProfile" class="dropdown-toggle" href="#" onclick="$('#divProfile').toggle();">
+                            <span data-feather="chevron-down"></span>
+                        </a>
+
+                        <div id="divProfile" class="dropdown-menu">
+
+                            <a onclick="getLogout()" href="#" class="dropdown-item notify-item">
+                                <span>Logout</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+ 
+
+
+    </body>
+</html>
+
+
+
+<script>
+
+    $('.linkLogin').on('click', function (e) {
+
+        $("#txtUserName").val('');
+        $("#txtPassword").val('');
+
+        $('#modal-form-login').modal('show');
+    });
+
+
+</script>

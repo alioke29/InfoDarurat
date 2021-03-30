@@ -1,0 +1,65 @@
+﻿@using InfoDaruratSystem.Web.Library.Entities;
+
+@{
+    ViewData["Title"] = "Level Detail Page";
+}
+
+<div id="modal-form-leveldetail" class="modal" aria-hidden="true"
+     data-keyboard="false" data-backdrop="static"
+     style="top:10%; left:25%; width:50%; overflow:hidden;  ">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:120%;">
+
+            <div class="modal-header btn-primary" style="text-align:left; background-color:white;">
+                <h4 class="modal-title font-bold" style="color:#F03737;"><div id="title"></div></h4>
+            </div>
+
+            <div class="modal-body" style="height:300px; padding-left:30px; padding-top:30px;">
+
+                <form class="form-horizontal">
+
+                    <input type="hidden" id="hdnId" value="" />
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Level Name</label>
+                        <div class="col-lg-6">
+                            <input id="txtLevelName" type="text" placeholder="Level Name" class="form-control" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3">Description</label>
+                        <div class="col-lg-7">
+                            @Html.TextArea("txtDesc", "",
+                                    new
+                                    {
+                                        placeholder = "Description",
+                                        rows = "5",
+                                        maxlength = "1000",
+                                        @class = "form-control"
+                                    })
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer" style="width:100%; left:10%;">
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getClose();">
+                    <b>Cancel</b>
+                </button>
+                <button class="btn btn-primary mt-2 mr-1" type="button" style="width:20%; left:0; background-color:#F03737;"
+                        onclick="getSave();">
+                    <b>Save</b>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
